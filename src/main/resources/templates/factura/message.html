@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+<header th:replace="layout/layout :: header"></header>
+<div class="container py-4">
+    <div class="card bg-light">
+    <div class="card-header" th:text="${titulo}"></div>
+    <div class="card-body">
+
+        <a th:href="@{'/Cliente/listar'}" class="btn btn-light btn-xs">&laquo; Inicio</a>
+
+    </div>
+    </div>
+</div>
+<footer th:replace="layout/layout :: footer"></footer>
+<script th:replace="factura/js/autocomplete_productos :: javascript"></script>
+</body>
+</html>
