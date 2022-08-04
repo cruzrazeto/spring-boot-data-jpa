@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,6 +39,7 @@ public class FacturaController {
 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
+	@Secured({"ROLE_ADMIN"})
 	@GetMapping("/ver/{id}")
 	public String ver(@PathVariable("id") Long id,
 			Map<String, Object> model,
@@ -56,6 +58,7 @@ public class FacturaController {
 	}
 
 
+	@Secured({"ROLE_ADMIN"})
 	@GetMapping("/form/{clientId}")
 	public String crear(@PathVariable("clientId") Long clientId,
 			Map<String, Object> model,
@@ -75,11 +78,13 @@ public class FacturaController {
 	}
 
 
+	@Secured({"ROLE_ADMIN"})
 	@GetMapping(value = "/cargar-productos/{term}" , produces = {"application/json"} )
 	public @ResponseBody List<Producto> cargarProductos(@PathVariable String term) {
 		return clienteService.findByNombre(term);
 	}
 
+	@Secured({"ROLE_ADMIN"})
 	@PostMapping("/form")
 	public String guardar(@Valid Factura factura,
 			BindingResult result,
@@ -111,6 +116,7 @@ public class FacturaController {
 		return "redirect:/ver/" + factura.getCliente().getId();
 	}
 
+	@Secured({"ROLE_ADMIN"})
 	@GetMapping("/del/{id}")
 	public String deleteFactura(@PathVariable("id") Long id,
 			Map<String, Object> model,
@@ -127,5 +133,4 @@ public class FacturaController {
 		model.put("titulo", "Ver Cliente ");
 		return "redirect:/ver/" + factura.getCliente().getId();
 	}
-
 }
