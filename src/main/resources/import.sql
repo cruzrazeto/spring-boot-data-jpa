@@ -33,4 +33,11 @@ INSERT INTO FACTURASITEM (FACTITEM_CANT,FACT_ID,PRODUCTO_ID) VALUES(2,1,5);
 INSERT INTO FACTURAS (FACT_NAME,FACT_OBS,CLIENTE_USER_ID,FACT_CREATE) VALUES('Factura Bicicleta','Alguna Nota',1,NOW());
 INSERT INTO FACTURASITEM (FACTITEM_CANT,FACT_ID,PRODUCTO_ID) VALUES(1,2,6);
 
+INSERT INTO USUARIOS (username ,password, enable ) values ('admin','$2a$10$594134vDoEPwssMkym2fe.IRgEz1Kpr15Wsbkwc5k14GOYokOAZ4K',TRUE);
+INSERT INTO USUARIOS (username ,password, enable ) values ('andres','$2a$10$F36UX2xsI6QMy06mKpeaze1Ncw.M7f3EJM7c56K8CC.3pJJrQuDp6',TRUE);
+
+insert into roles (usuario_id, rol) values ( 1 , 'ROLE_USER');
+insert into roles (usuario_id, rol) values ( 1 , 'ROLE_ADMIN');
+insert into roles (usuario_id, rol) values ( 2 , 'ROLE_USER');
+
 
