@@ -3,6 +3,7 @@ package com.bolsedeideasspringboot.jpa.app.controllers;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Collection;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -11,6 +12,7 @@ import org.apache.catalina.authenticator.SpnegoAuthenticator.AuthenticateAction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -49,7 +51,8 @@ public class ClienteController {
 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
-	
+	@Autowired
+	private MessageSource messageSource;
 
 	@Autowired
 	private IClienteService clienteService;
@@ -92,7 +95,7 @@ public class ClienteController {
 
 	
 	@RequestMapping(value = { "/Cliente/listar"}, method = RequestMethod.GET )
-	public String listar(@RequestParam(name = "page",defaultValue = "0") int page,Model model, Authentication authentication, HttpServletRequest request) {
+	public String listar(@RequestParam(name = "page",defaultValue = "0") int page,Model model, Authentication authentication, HttpServletRequest request, Locale locale) {
 		
 		if (authentication != null) {
 			logger.info("usuario autenticado:".concat(authentication.getName()));
@@ -119,7 +122,7 @@ public class ClienteController {
 
 		PageRender<Cliente> pageRender = new PageRender<>("/Cliente/listar", clientes);
 
-		model.addAttribute("titulo", "Listado de clientes");
+		model.addAttribute("titulo", messageSource.getMessage("text.cliente.listado.titulo", null, locale));
 		model.addAttribute("clientes",clientes);
 		model.addAttribute("page",pageRender);
 		return "/cliente/listar";

@@ -16,6 +16,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="container-fluid">
     <ul class="navbar-nav">
       <li class="nav-item active">
         <a class="nav-link" th:href="@{/}">Inicio <span class="sr-only">(current)</span></a>
@@ -39,6 +40,22 @@
            </div>
         </li>
       </ul>
+    <ul class="navbar-nav navbar-right ms-4">
+      <li class="nav-item mx-1"><a class="btn btn-outline-success" th:href="@{/locale(lang=es_ES)}">ES</a></li>
+      <li class="nav-item mx-1"><a class="btn btn-outline-success" th:href="@{/locale(lang=en_UK)}">UK</a></li>
+      <li class="nav-item mx-1"><a class="btn btn-outline-success" th:href="@{/locale(lang=it_IT)}">IT</a></li>
+      <li class="nav-item dropdown show mx-2">
+        <a class="btn btn-outline-primary dropdown-toggle" href="#"
+            role="button" id="dropdownLanguage" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false"><span th:text="#{text.locale.language}"></span></a>
+           <div class="dropdown-menu" aria-labelledby="dropdownLanguage">
+             <a class="dropdown-item" th:href="@{/locale(lang=es_ES)}" th:text="#{text.locale.es}"><i class="flag flag-spain"></i></a>
+             <a class="dropdown-item" th:href="@{/locale(lang=en_UK)}" th:text="#{text.locale.en}"><i class="flag flag-united-kingdom"></i></a>
+             <a class="dropdown-item" th:href="@{/locale(lang=it_IT)}" th:text="#{text.locale.it}"><i class="flag flag-italy"></i></a>
+           </div>
+      </li>
+    </ul>
+    </div>
   </div>
 </nav>
 <div class="alert alert-success" th:if="${success != null}" th:text="${success}"></div>
