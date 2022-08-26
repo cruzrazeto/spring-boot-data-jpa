@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.Index;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
@@ -30,8 +31,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Cliente implements Serializable {
 	private static final long serialVersionUID = 4327690299451102763L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "USER_ID")
+    @SequenceGenerator(name="seqCliente", sequenceName="SEQ_CLIENTE", allocationSize=1, initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "seqCliente")
+	@Column(name = "USER_ID", nullable=false, updatable=false)
 	private Long id;
 	@NotEmpty
 	@Column(name = "USER_NAME")

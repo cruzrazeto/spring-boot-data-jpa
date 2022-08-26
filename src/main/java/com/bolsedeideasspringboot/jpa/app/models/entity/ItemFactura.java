@@ -12,6 +12,7 @@ import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -19,7 +20,8 @@ import javax.persistence.Table;
 public class ItemFactura implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name="seqFacturaItem", sequenceName="SEQ_FACTURAITEM", allocationSize=1, initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "seqFacturaItem")
 	@Column(name = "FACTITEM_ID")
 	private Long id;
 
@@ -27,12 +29,12 @@ public class ItemFactura implements Serializable {
 	private Long cantidad;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "producto_id")
+	@JoinColumn(name = "producto_id", nullable = false, updatable = true)
 	private Producto producto;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "FACT_ID", nullable = false, updatable = false)
-    private Factura factura;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "FACT_ID", nullable = false, updatable = false)
+//    private Factura factura;
 
 
 	public Long getId() {
@@ -60,13 +62,13 @@ public class ItemFactura implements Serializable {
 	}
 
 
-	public Factura getFactura() {
-		return factura;
-	}
-
-	public void setFactura(Factura factura) {
-		this.factura = factura;
-	}
+//	public Factura getFactura() {
+//		return factura;
+//	}
+//
+//	public void setFactura(Factura factura) {
+//		this.factura = factura;
+//	}
 
 	public Double calcularImporte() {
 		if (producto == null)

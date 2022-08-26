@@ -13,6 +13,7 @@ import com.bolsedeideasspringboot.jpa.app.models.dao.IFacturaDao;
 import com.bolsedeideasspringboot.jpa.app.models.dao.IProductoDao;
 import com.bolsedeideasspringboot.jpa.app.models.entity.Cliente;
 import com.bolsedeideasspringboot.jpa.app.models.entity.Factura;
+import com.bolsedeideasspringboot.jpa.app.models.entity.ItemFactura;
 import com.bolsedeideasspringboot.jpa.app.models.entity.Producto;
 
 @Service
@@ -90,7 +91,13 @@ public class ClienteService implements IClienteService {
 	@Override
 	@Transactional(readOnly = true)
 	public Factura findFacturaByIdWithClienteWithItemFacturaWithProducto(Long id) {
-		return facturaDao.fetchByIdWithClienteWithItemFacturaWithProducto(id);
+		Factura f = facturaDao.fetchByIdWithClienteWithItemFacturaWithProducto(id);
+//		if (f!=null) {
+//			for (ItemFactura i : f.getItems()) {
+//			    i.setFactura(f);
+//		    }
+//		}
+		return f;
 	}
 
 

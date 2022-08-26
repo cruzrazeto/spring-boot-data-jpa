@@ -3,6 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="layout/layout :: head"></head>
 <body>
+<div id="i18n_eliminar_factura" th:text="#{text.cliente.factura.eliminarOk}" style="display: none;"></div>
 <header th:replace="layout/layout :: header"></header>
 <div class="container py-4">
     <div class="card">
@@ -24,12 +25,12 @@
               class="table table-bordered table-striped my-4">
        <thead class="thead-inverse">
          <tr>
-         <th>Folio</th>
-         <th>Descripción</th>
-         <th>Fecha</th>
-         <th>Total</th>
-         <th sec:authorize="hasRole('ROLE_ADMIN')">Ver</th>
-         <th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar<th>
+         <th th:text="#{text.cliente.factura.folio}">Folio</th>
+         <th th:text="#{text.cliente.factura.descripcion}">Descripción</th>
+         <th th:text="#{text.cliente.factura.fecha}">Fecha</th>
+         <th th:text="#{text.cliente.factura.total}">Total</th>
+         <th sec:authorize="hasRole('ROLE_ADMIN')" th:text="#{text.cliente.factura.detalle}">Ver</th>
+         <th sec:authorize="hasRole('ROLE_ADMIN')" th:text="#{text.cliente.factura.eliminar}">Eliminar<th>
          </tr>
        </thead>
        <tbody>
@@ -40,7 +41,7 @@
          <td th:text="${factura.total}"></td>
          <td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-primary btn-xs" th:href="@{/Factura/ver/} + ${factura.id}" th:text="'Detalle'"/></td>
 		 <td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger btn-xs" th:href="@{/Factura/del/} + ${factura.id}" th:text="'Eliminar'"
-		         onclick="return javascript:confirm('Está seguro que desea eliminar?');"></a></td>
+		         onclick="return confirm(document.getElementById('i18n_eliminar_factura').innerHTML);"></a></td>
        </tr>
        </tbody>
        </table>

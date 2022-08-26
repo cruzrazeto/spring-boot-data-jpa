@@ -17,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -31,8 +32,9 @@ indexes = {@Index(name = "IDX2_FACTURA", columnList = "FACT_NAME, FACT_OBS",uniq
 public class Factura implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "FACT_ID")
+    @SequenceGenerator(name="seqFactura", sequenceName="SEQ_FACTURA", allocationSize=1, initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "seqFactura")
+	@Column(name = "FACT_ID", unique = true, nullable = false)
 	private Long id;
 
 	@NotEmpty

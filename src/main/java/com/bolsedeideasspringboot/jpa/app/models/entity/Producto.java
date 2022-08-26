@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.PrePersist;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,7 +24,8 @@ indexes = {@Index(name = "IDX2_PRODUCTOS", columnList = "PROD_NOMBRE",unique = f
 public class Producto implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name="seqProducto", sequenceName="SEQ_PRODUCTO", allocationSize=1, initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "seqProducto")
 	@Column(name = "PRODUCTO_ID")
 	private Long id;
 
